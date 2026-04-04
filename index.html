@@ -430,80 +430,79 @@ nav.white-nav a:hover {
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-24 md:py-32 px-6 md:px-12 bg-cream">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-3 gap-12 md:gap-24">
-                <div class="md:col-span-1 reveal">
-                    <h2 class="text-4xl md:text-5xl tracking-tight font-semibold mb-6 font-jakarta">What I Do</h2>
+    <!-- Services Section — card / tile grid -->
+    <section id="services" class="py-24 md:py-32 px-6 md:px-12 bg-neutral-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-14 md:mb-16 reveal">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-500 mb-4">Expertise</p>
+                <h2 class="text-4xl md:text-5xl tracking-tight font-semibold font-jakarta text-neutral-900">What I Do</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Service 1 -->
+                <div class="group bg-white rounded-2xl border border-neutral-200/80 p-6 md:p-8 shadow-sm hover:shadow-md hover:border-indigo-200/60 transition-all duration-300 reveal delay-100">
+                    <div class="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center mb-5 text-indigo-600 group-hover:bg-indigo-100/80 transition-colors">
+                        <iconify-icon icon="lucide:workflow" width="22" stroke-width="1.5"></iconify-icon>
+                    </div>
+                    <h3 class="text-lg font-semibold tracking-tight text-neutral-900 mb-3 font-jakarta">Workflow Analysis &amp; Improvement</h3>
+                    <p class="text-sm text-neutral-600 leading-relaxed">
+                        I analyze end-to-end workflows using tools like SIPOC and As-Is mapping to identify gaps, bottlenecks, and opportunities for simplification before translating findings into actionable product requirements.
+                    </p>
                 </div>
 
-                <div class="md:col-span-2 grid sm:grid-cols-2 gap-x-12 gap-y-16">
-                    <!-- Service 1 -->
-                    <div class="space-y-4 reveal delay-100 group">
-                        <div class="w-10 h-10 border border-neutral-200 rounded-full flex items-center justify-center mb-4 group-hover:border-indigo-500 transition-colors" style="">
-                            <iconify-icon icon="lucide:workflow" width="18" stroke-width="1.5" class="group-hover:text-indigo-500 transition-colors" style=""></iconify-icon>
-                        </div>
-                        <h4 class="text-xl font-medium tracking-tight">Workflow Analysis & Improvement</h4>
-                        <p class="text-sm text-neutral-600 leading-relaxed" style="">
-                            I analyze end-to-end workflows using tools like SIPOC and As-Is mapping to identify gaps, bottlenecks, and opportunities for simplification before translating findings into actionable product requirements.
-                        </p>
+                <!-- Service 2 -->
+                <div class="group bg-white rounded-2xl border border-neutral-200/80 p-6 md:p-8 shadow-sm hover:shadow-md hover:border-indigo-200/60 transition-all duration-300 reveal delay-150">
+                    <div class="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center mb-5 text-indigo-600 group-hover:bg-indigo-100/80 transition-colors">
+                        <iconify-icon icon="lucide:list-checks" width="22" stroke-width="1.5"></iconify-icon>
                     </div>
+                    <h3 class="text-lg font-semibold tracking-tight text-neutral-900 mb-3 font-jakarta">User Stories &amp; Acceptance Criteria</h3>
+                    <p class="text-sm text-neutral-600 leading-relaxed">
+                        I help translate workflows and user needs into clear user stories and acceptance criteria, reducing ambiguity and supporting efficient development.
+                    </p>
+                </div>
 
-                    <!-- Service 2 -->
-                    <div class="space-y-4 reveal delay-150 group">
-                        <div class="w-10 h-10 border border-neutral-200 rounded-full flex items-center justify-center mb-4 group-hover:border-indigo-500 transition-colors" style="">
-                            <iconify-icon icon="lucide:list-checks" width="18" stroke-width="1.5" class="group-hover:text-indigo-500 transition-colors" style=""></iconify-icon>
-                        </div>
-                        <h4 class="text-xl font-medium tracking-tight">User Stories & Acceptance Criteria</h4>
-                        <p class="text-sm text-neutral-600 leading-relaxed" style="">
-                            I help translate workflows and user needs into clear user stories and acceptance criteria, reducing ambiguity and supporting efficient development.
-                        </p>
+                <!-- Service 3 -->
+                <div class="group bg-white rounded-2xl border border-neutral-200/80 p-6 md:p-8 shadow-sm hover:shadow-md hover:border-indigo-200/60 transition-all duration-300 reveal delay-200">
+                    <div class="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center mb-5 text-indigo-600 group-hover:bg-indigo-100/80 transition-colors">
+                        <iconify-icon icon="lucide:user-search" width="22" stroke-width="1.5"></iconify-icon>
                     </div>
+                    <h3 class="text-lg font-semibold tracking-tight text-neutral-900 mb-3 font-jakarta">User Research &amp; Interviews</h3>
+                    <p class="text-sm text-neutral-600 leading-relaxed">
+                        I conduct user interviews and stakeholder conversations to understand real-world pain points, validate assumptions, and ensure product decisions are grounded in user needs.
+                    </p>
+                </div>
 
-                    <!-- Service 3 -->
-                    <div class="space-y-4 reveal delay-200 group">
-                        <div class="w-10 h-10 border border-neutral-200 rounded-full flex items-center justify-center mb-4 group-hover:border-indigo-500 transition-colors" style="">
-                            <iconify-icon icon="lucide:user-search" width="18" stroke-width="1.5" class="group-hover:text-indigo-500 transition-colors" style=""></iconify-icon>
-                        </div>
-                        <h4 class="text-xl font-medium tracking-tight">User Research & Interviews</h4>
-                        <p class="text-sm text-neutral-600 leading-relaxed" style="">
-                            I conduct user interviews and stakeholder conversations to understand real-world pain points, validate assumptions, and ensure product decisions are grounded in user needs.
-                        </p>
+                <!-- Service 4 -->
+                <div class="group bg-white rounded-2xl border border-neutral-200/80 p-6 md:p-8 shadow-sm hover:shadow-md hover:border-indigo-200/60 transition-all duration-300 reveal delay-250">
+                    <div class="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center mb-5 text-indigo-600 group-hover:bg-indigo-100/80 transition-colors">
+                        <iconify-icon icon="lucide:handshake" width="22" stroke-width="1.5"></iconify-icon>
                     </div>
+                    <h3 class="text-lg font-semibold tracking-tight text-neutral-900 mb-3 font-jakarta">Stakeholder Communication &amp; Alignment</h3>
+                    <p class="text-sm text-neutral-600 leading-relaxed">
+                        I facilitate alignment across product, engineering, and operations by clarifying goals, documenting decisions, and ensuring shared understanding throughout the product lifecycle.
+                    </p>
+                </div>
 
-                    <!-- Service 4 -->
-                    <div class="space-y-4 reveal delay-250 group">
-                        <div class="w-10 h-10 border border-neutral-200 rounded-full flex items-center justify-center mb-4 group-hover:border-indigo-500 transition-colors" style="">
-                            <iconify-icon icon="lucide:handshake" width="18" stroke-width="1.5" class="group-hover:text-indigo-500 transition-colors" style=""></iconify-icon>
-                        </div>
-                        <h4 class="text-xl font-medium tracking-tight">Stakeholder Communication & Alignment</h4>
-                        <p class="text-sm text-neutral-600 leading-relaxed" style="">
-                            I facilitate alignment across product, engineering, and operations by clarifying goals, documenting decisions, and ensuring shared understanding throughout the product lifecycle.
-                        </p>
+                <!-- Service 5 -->
+                <div class="group bg-white rounded-2xl border border-neutral-200/80 p-6 md:p-8 shadow-sm hover:shadow-md hover:border-indigo-200/60 transition-all duration-300 reveal delay-300">
+                    <div class="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center mb-5 text-indigo-600 group-hover:bg-indigo-100/80 transition-colors">
+                        <iconify-icon icon="lucide:file-text" width="22" stroke-width="1.5"></iconify-icon>
                     </div>
+                    <h3 class="text-lg font-semibold tracking-tight text-neutral-900 mb-3 font-jakarta">Process Discovery &amp; Documentation</h3>
+                    <p class="text-sm text-neutral-600 leading-relaxed">
+                        I document current-state and future-state processes (As-Is / To-Be) to align stakeholders, reduce ambiguity, and support smooth handoffs between product, engineering, and operations.
+                    </p>
+                </div>
 
-                    <!-- Service 5 -->
-                    <div class="space-y-4 reveal delay-300 group">
-                        <div class="w-10 h-10 border border-neutral-200 rounded-full flex items-center justify-center mb-4 group-hover:border-indigo-500 transition-colors" style="">
-                            <iconify-icon icon="lucide:file-text" width="18" stroke-width="1.5" class="group-hover:text-indigo-500 transition-colors" style=""></iconify-icon>
-                        </div>
-                        <h4 class="text-xl font-medium tracking-tight">Process Discovery & Documentation</h4>
-                        <p class="text-sm text-neutral-600 leading-relaxed" style="">
-                            I document current-state and future-state processes (As-Is / To-Be) to align stakeholders, reduce ambiguity, and support smooth handoffs between product, engineering, and operations.
-                        </p>
+                <!-- Service 6 -->
+                <div class="group bg-white rounded-2xl border border-neutral-200/80 p-6 md:p-8 shadow-sm hover:shadow-md hover:border-indigo-200/60 transition-all duration-300 reveal delay-300">
+                    <div class="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center mb-5 text-indigo-600 group-hover:bg-indigo-100/80 transition-colors">
+                        <iconify-icon icon="lucide:layout" width="22" stroke-width="1.5"></iconify-icon>
                     </div>
-
-                    <!-- Service 6 -->
-                    <div class="space-y-4 reveal delay-300 group">
-                        <div class="w-10 h-10 border border-neutral-200 rounded-full flex items-center justify-center mb-4 group-hover:border-indigo-500 transition-colors" style="">
-                            <iconify-icon icon="lucide:layout" width="18" stroke-width="1.5" class="group-hover:text-indigo-500 transition-colors" style=""></iconify-icon>
-                        </div>
-                        <h4 class="text-xl font-medium tracking-tight">Product Design</h4>
-                        <p class="text-sm text-neutral-600 leading-relaxed" style="">
-                            I focus on user-centered design to shape intuitive products and experiences that solve real problems and drive adoption.
-                        </p>
-                    </div>
+                    <h3 class="text-lg font-semibold tracking-tight text-neutral-900 mb-3 font-jakarta">Product Design</h3>
+                    <p class="text-sm text-neutral-600 leading-relaxed">
+                        I focus on user-centered design to shape intuitive products and experiences that solve real problems and drive adoption.
+                    </p>
                 </div>
             </div>
         </div>
