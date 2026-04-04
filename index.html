@@ -99,44 +99,84 @@ content: '|';
 animation: blink 1s step-end infinite;
 }
 @keyframes blink { 50% { opacity: 0; } }
-/* Animated Watercolor Effect */
-.watercolor-bg {
-  position: relative;
-  display: inline-block;
+/* Hero watercolor — full-bleed layer (not tied to headline box) for consistent wide / fullscreen layout */
+.hero-watercolor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
-.watercolor-bg::before {
+.hero-watercolor::before {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200%;
-  height: 200%;
-  background: 
-    /* Upper right corner - blue to purple ombre, positioned to cover navigation tabs */
-    radial-gradient(ellipse clamp(1200px, 100vw, 1600px) clamp(900px, 80vh, 1200px) at 90% 5%, rgba(135, 206, 235, 0.3) 0%, rgba(186, 147, 216, 0.25) 30%, rgba(186, 147, 216, 0.1) 50%, transparent 70%),
-    /* Lower left corner - blue to purple ombre */
-    radial-gradient(ellipse clamp(1200px, 100vw, 1600px) clamp(1000px, 85vh, 1300px) at 8% 92%, rgba(135, 206, 235, 0.3) 0%, rgba(186, 147, 216, 0.25) 30%, rgba(186, 147, 216, 0.1) 50%, transparent 70%);
-  filter: blur(35px);
-  z-index: -1;
-  pointer-events: none;
-  opacity: 1;
+  /* Bleed past hero so blurred edges don't clip */
+  inset: -12%;
+  background:
+    radial-gradient(
+      ellipse min(90vw, 72rem) min(70vh, 44rem) at 88% 4%,
+      rgba(135, 206, 235, 0.28) 0%,
+      rgba(186, 147, 216, 0.18) 42%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse min(85vw, 68rem) min(65vh, 42rem) at 10% 96%,
+      rgba(135, 206, 235, 0.26) 0%,
+      rgba(186, 147, 216, 0.16) 44%,
+      transparent 70%
+    ),
+    /* Soft center bridge so ultrawide doesn't feel empty between corners */
+    radial-gradient(
+      ellipse min(55vw, 48rem) min(45vh, 36rem) at 50% 48%,
+      rgba(186, 147, 216, 0.06) 0%,
+      transparent 65%
+    );
+  filter: blur(40px);
 }
 
-/* Responsive adjustments for different screen sizes */
 @media (max-width: 768px) {
-  .watercolor-bg::before {
-    background: 
-      radial-gradient(ellipse 1000px 800px at 90% 5%, rgba(135, 206, 235, 0.3) 0%, rgba(186, 147, 216, 0.25) 30%, rgba(186, 147, 216, 0.1) 50%, transparent 70%),
-      radial-gradient(ellipse 900px 700px at 8% 92%, rgba(135, 206, 235, 0.3) 0%, rgba(186, 147, 216, 0.25) 30%, rgba(186, 147, 216, 0.1) 50%, transparent 70%);
+  .hero-watercolor::before {
+    inset: -8%;
+    filter: blur(28px);
+    background:
+      radial-gradient(
+        ellipse 120% 55vh at 92% 2%,
+        rgba(135, 206, 235, 0.3) 0%,
+        rgba(186, 147, 216, 0.2) 45%,
+        transparent 72%
+      ),
+      radial-gradient(
+        ellipse 115% 50vh at 8% 98%,
+        rgba(135, 206, 235, 0.26) 0%,
+        rgba(186, 147, 216, 0.16) 45%,
+        transparent 72%
+      );
   }
 }
 
 @media (min-width: 1920px) {
-  .watercolor-bg::before {
-    background: 
-      radial-gradient(ellipse 1800px 1400px at 90% 5%, rgba(135, 206, 235, 0.3) 0%, rgba(186, 147, 216, 0.25) 30%, rgba(186, 147, 216, 0.1) 50%, transparent 70%),
-      radial-gradient(ellipse 1700px 1500px at 8% 92%, rgba(135, 206, 235, 0.3) 0%, rgba(186, 147, 216, 0.25) 30%, rgba(186, 147, 216, 0.1) 50%, transparent 70%);
+  .hero-watercolor::before {
+    /* Cap blob size on very wide viewports; nudge anchors slightly inward */
+    inset: -10%;
+    filter: blur(52px);
+    background:
+      radial-gradient(
+        ellipse min(64rem, 75vw) min(42rem, 48vh) at 84% 8%,
+        rgba(135, 206, 235, 0.24) 0%,
+        rgba(186, 147, 216, 0.15) 46%,
+        transparent 72%
+      ),
+      radial-gradient(
+        ellipse min(60rem, 72vw) min(40rem, 46vh) at 14% 92%,
+        rgba(135, 206, 235, 0.22) 0%,
+        rgba(186, 147, 216, 0.14) 46%,
+        transparent 72%
+      ),
+      radial-gradient(
+        ellipse min(42rem, 38vw) min(34rem, 38vh) at 50% 50%,
+        rgba(186, 147, 216, 0.05) 0%,
+        transparent 68%
+      );
   }
 }
 .purple-glow {
@@ -160,7 +200,7 @@ nav.white-nav a:hover {
 
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 w-full z-50 mix-blend-difference text-neutral-900 px-6 py-6 md:px-12 flex justify-end items-center">
-        <div class="hidden md:flex gap-8 text-sm tracking-wide font-medium">
+        <div class="hidden md:flex gap-8 text-sm tracking-wide font-medium items-center">
             <a href="/#home" class="magnetic hover:text-indigo-500 transition-colors duration-300" style="">Home</a>
             <a href="/#about" class="magnetic hover:text-indigo-500 transition-colors duration-300" style="">About Me</a>
             <a href="/case-study/" class="magnetic hover:text-indigo-500 transition-colors duration-300" style="">Case Study</a>
@@ -169,15 +209,16 @@ nav.white-nav a:hover {
             <a href="/#contact" class="magnetic hover:text-indigo-500 transition-colors duration-300" style="">Contact</a>
         </div>
 
-        <a href="/#contact" class="md:hidden text-neutral-900 mix-blend-normal" style="">
+        <a href="/#contact" class="md:hidden text-neutral-900 mix-blend-normal">
             <iconify-icon icon="lucide:menu" width="24" stroke-width="1.5"></iconify-icon>
         </a>
     </nav>
 
     <!-- Hero Section -->
-    <header id="home" class="min-h-screen flex flex-col md:px-12 pt-20 pr-6 pl-6 relative justify-center">
-        <div class="max-w-7xl mx-auto w-full mt-12 md:mt-0">
-            <h1 class="text-[10vw] md:text-[8vw] leading-[0.9] tracking-tighter font-medium text-neutral-900 mb-8 md:mb-12 reveal active watercolor-bg" style="">
+    <header id="home" class="min-h-screen flex flex-col md:px-12 pt-20 pr-6 pl-6 relative justify-center overflow-hidden">
+        <div class="hero-watercolor" aria-hidden="true"></div>
+        <div class="max-w-7xl mx-auto w-full mt-12 md:mt-0 relative z-10">
+            <h1 class="text-[10vw] md:text-[8vw] leading-[0.9] tracking-tighter font-medium text-neutral-900 mb-8 md:mb-12 reveal active" style="">
                 I Build <br>
                 Thoughtful Solutions, <br>
                 <span class="text-neutral-400" style="">Not Just Software</span>
@@ -189,9 +230,9 @@ nav.white-nav a:hover {
                     Building products where technology serves the user — not the other way around.
                 </p>
                 
-                <a href="/case-study/" class="magnetic group flex items-center gap-2 text-xs font-medium uppercase tracking-widest border-b border-neutral-200 pb-1 hover:border-neutral-900 hover:text-neutral-900 text-neutral-600 transition-all" style="">
+                <a href="/case-study/" class="magnetic group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-900 border-b-2 border-neutral-900 pb-1.5 hover:border-indigo-500 hover:text-indigo-600 transition-colors" style="">
                     Case Study
-                    <iconify-icon icon="lucide:arrow-right" width="14" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+                    <iconify-icon icon="lucide:arrow-right" width="15" class="group-hover:translate-x-1 transition-transform" stroke-width="2"></iconify-icon>
                 </a>
             </div>
         </div>
@@ -237,7 +278,7 @@ nav.white-nav a:hover {
     <!-- Tech Stack -->
     <section class="py-12 border-y border-neutral-200 overflow-hidden bg-white/50" style="">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <p class="text-xs uppercase tracking-widest text-neutral-400 mb-8 text-center" style="">Tools I've Mastered</p>
+            <p class="text-xs uppercase tracking-widest text-neutral-400 mb-8 text-center" style="">Skills &amp; Tools</p>
             <div class="flex flex-wrap justify-center gap-4 md:gap-6 reveal">
                 <span class="px-4 py-2 bg-white rounded-lg border border-neutral-200 text-sm font-medium text-neutral-600 hover:border-indigo-500 hover:text-indigo-500 transition-colors" style="">PowerBI</span>
                 <span class="px-4 py-2 bg-white rounded-lg border border-neutral-200 text-sm font-medium text-neutral-600 hover:border-indigo-500 hover:text-indigo-500 transition-colors" style="">Tableau</span>
@@ -257,6 +298,8 @@ nav.white-nav a:hover {
                 <span class="px-4 py-2 bg-white rounded-lg border border-neutral-200 text-sm font-medium text-neutral-600 hover:border-indigo-500 hover:text-indigo-500 transition-colors" style="">Dashboarding</span>
                 <span class="px-4 py-2 bg-white rounded-lg border border-neutral-200 text-sm font-medium text-neutral-600 hover:border-indigo-500 hover:text-indigo-500 transition-colors" style="">Continuous Improvement</span>
                 <span class="px-4 py-2 bg-white rounded-lg border border-neutral-200 text-sm font-medium text-neutral-600 hover:border-indigo-500 hover:text-indigo-500 transition-colors" style="">Change Management</span>
+                <span class="px-4 py-2 bg-white rounded-lg border border-neutral-200 text-sm font-medium text-neutral-600 hover:border-indigo-500 hover:text-indigo-500 transition-colors" style="">Privacy &amp; Compliancy</span>
+                <span class="px-4 py-2 bg-white rounded-lg border border-neutral-200 text-sm font-medium text-neutral-600 hover:border-indigo-500 hover:text-indigo-500 transition-colors" style="">Cross-Functional Collaboration</span>
             </div>
         </div>
     </section>
@@ -365,10 +408,10 @@ nav.white-nav a:hover {
                             </div>
                             <!-- Fake Chart -->
                             <div class="bg-white p-4 rounded-xl shadow-sm border border-neutral-100 h-32 flex items-end gap-2 px-6 pb-4" style="">
-                                <div class="w-full bg-indigo-500/10 rounded-t h-[40%] animate-pulse" style=""></div>
-                                <div class="w-full bg-indigo-500/20 rounded-t h-[60%] animate-[pulse_1.5s_infinite]" style=""></div>
-                                <div class="w-full bg-indigo-500/40 rounded-t h-[50%] animate-[pulse_2s_infinite]" style=""></div>
-                                <div class="w-full bg-indigo-500/60 rounded-t h-[80%] animate-[pulse_1s_infinite]" style=""></div>
+                                <div class="w-full bg-indigo-500/10 rounded-t h-[40%]" style=""></div>
+                                <div class="w-full bg-indigo-500/20 rounded-t h-[60%]" style=""></div>
+                                <div class="w-full bg-indigo-500/40 rounded-t h-[50%]" style=""></div>
+                                <div class="w-full bg-indigo-500/60 rounded-t h-[80%]" style=""></div>
                                 <div class="w-full bg-indigo-500 rounded-t h-[90%]" style=""></div>
                             </div>
                         </div>
@@ -434,7 +477,6 @@ nav.white-nav a:hover {
     <section id="services" class="py-24 md:py-32 px-6 md:px-12 bg-neutral-50">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-14 md:mb-16 reveal">
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-500 mb-4">Expertise</p>
                 <h2 class="text-4xl md:text-5xl tracking-tight font-semibold font-jakarta text-neutral-900">What I Do</h2>
             </div>
 
@@ -529,7 +571,34 @@ nav.white-nav a:hover {
         </div>
     </section>
 
-    <!-- Footer -->
+    <footer class="bg-neutral-900 text-neutral-400 border-t border-neutral-800">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-14">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
+                <div>
+                    <p class="font-jakarta text-lg font-semibold text-cream tracking-tight">Sahithi Josyam</p>
+                    <p class="text-sm mt-1">Product · Automation &amp; AI</p>
+                </div>
+                <nav class="flex flex-wrap gap-x-8 gap-y-3 text-sm" aria-label="Footer">
+                    <a href="/#home" class="hover:text-indigo-400 transition-colors">Home</a>
+                    <a href="/#work" class="hover:text-indigo-400 transition-colors">Work</a>
+                    <a href="/case-study/" class="hover:text-indigo-400 transition-colors">Case Study</a>
+                    <a href="/#contact" class="hover:text-indigo-400 transition-colors">Contact</a>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <a href="mailto:sahithi.josyam@gmail.com" class="hover:text-indigo-400 transition-colors text-sm" aria-label="Email">Email</a>
+                    <span class="text-neutral-600" aria-hidden="true">|</span>
+                    <a href="https://www.linkedin.com/in/sahithi-josyam-41132031b" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm hover:text-indigo-400 transition-colors">
+                        LinkedIn
+                        <iconify-icon icon="lucide:arrow-up-right" width="14" class="opacity-70"></iconify-icon>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-10 pt-8 border-t border-neutral-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs text-neutral-500">
+                <p>© 2026 Sahithi Josyam. All rights reserved.</p>
+                <p class="sm:text-right">Built with care — thanks for visiting.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         // Scroll Reveal
