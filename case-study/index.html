@@ -272,6 +272,34 @@ tailwind.config = {
         </div>
     </section>
 
+    <footer class="bg-neutral-900 text-neutral-400 border-t border-neutral-800">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-14">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
+                <div>
+                    <p class="font-jakarta text-lg font-semibold text-cream tracking-tight">Sahithi Josyam</p>
+                    <p class="text-sm mt-1">Product · Automation &amp; AI</p>
+                </div>
+                <nav class="flex flex-wrap gap-x-8 gap-y-3 text-sm" aria-label="Footer">
+                    <a href="/#home" class="hover:text-indigo-400 transition-colors">Home</a>
+                    <a href="/#work" class="hover:text-indigo-400 transition-colors">Work</a>
+                    <a href="/case-study/" class="hover:text-indigo-400 transition-colors">Case Study</a>
+                    <a href="/#contact" class="hover:text-indigo-400 transition-colors">Contact</a>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <a href="mailto:sahithi.josyam@gmail.com" class="hover:text-indigo-400 transition-colors text-sm" aria-label="Email">Email</a>
+                    <span class="text-neutral-600" aria-hidden="true">|</span>
+                    <a href="https://www.linkedin.com/in/sahithi-josyam-41132031b" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm hover:text-indigo-400 transition-colors">
+                        LinkedIn
+                        <iconify-icon icon="lucide:arrow-up-right" width="14" class="opacity-70"></iconify-icon>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-10 pt-8 border-t border-neutral-800 text-center text-xs text-neutral-500">
+                <p>Built with care &mdash; thanks for visiting!</p>
+            </div>
+        </div>
+    </footer>
+
     <script>
         const reveals = document.querySelectorAll('.reveal');
         const io = new IntersectionObserver((entries) => {
