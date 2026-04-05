@@ -50,6 +50,20 @@ tailwind.config = {
   transition: opacity 0.3s ease;
 }
 .magnetic { transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.mobile-nav-overlay {
+  background-color: #ffffff;
+  mix-blend-mode: normal !important;
+  isolation: isolate;
+  z-index: 10000;
+  min-height: 100dvh;
+  min-height: 100vh;
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.08);
+}
+.mobile-nav-overlay.is-open {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap">
 <style>.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style>
@@ -58,9 +72,9 @@ tailwind.config = {
 
     <div id="cursor-glow" class="cursor-glow hidden md:block" style="left: 0px; top: 0px;"></div>
 
-    <!-- Navigation (static, not fixed: avoids overlapping body text) -->
-    <nav class="relative w-full mix-blend-normal text-neutral-900 px-6 py-6 md:px-12 flex justify-end items-center">
-        <div class="hidden md:flex gap-8 text-sm tracking-wide font-medium">
+    <!-- Navigation: sticky on small screens so the menu stays reachable while scrolling -->
+    <nav class="sticky top-0 z-50 w-full mix-blend-normal text-neutral-900 px-6 py-6 md:px-12 flex justify-end items-center bg-cream/95 backdrop-blur-sm md:static md:z-auto md:bg-transparent md:backdrop-blur-none">
+        <div class="hidden md:flex gap-8 text-sm tracking-wide font-medium items-center">
             <a href="/" class="magnetic hover:text-indigo-500 transition-colors duration-300">Home</a>
             <a href="/#about" class="magnetic hover:text-indigo-500 transition-colors duration-300">About Me</a>
             <a href="/case-study/" class="magnetic hover:text-indigo-500 transition-colors duration-300">Case Study</a>
@@ -69,9 +83,9 @@ tailwind.config = {
             <a href="/#contact" class="magnetic hover:text-indigo-500 transition-colors duration-300">Contact</a>
         </div>
 
-        <a href="/#contact" class="md:hidden text-neutral-900 mix-blend-normal">
+        <button type="button" id="mobile-menu-open" class="md:hidden relative z-[60] inline-flex items-center justify-center text-neutral-900 p-2 -mr-2 rounded-lg hover:bg-neutral-900/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
             <iconify-icon icon="lucide:menu" width="24" stroke-width="1.5"></iconify-icon>
-        </a>
+        </button>
     </nav>
 
     <!-- Title (typography aligned with index section headings) -->
@@ -298,6 +312,22 @@ tailwind.config = {
         </div>
     </footer>
 
+    <div id="mobile-menu" class="mobile-nav-overlay fixed inset-0 flex flex-col md:hidden opacity-0 invisible pointer-events-none transition-opacity duration-200 ease-out" style="padding-bottom: env(safe-area-inset-bottom, 0px);" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site navigation">
+        <div class="flex justify-end px-4 py-4 shrink-0 bg-white" style="padding-top: max(1rem, env(safe-area-inset-top));">
+            <button type="button" id="mobile-menu-close" class="inline-flex items-center justify-center p-2 -mr-2 rounded-lg text-neutral-900 hover:bg-neutral-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500" aria-label="Close menu">
+                <iconify-icon icon="lucide:x" width="24" stroke-width="1.5"></iconify-icon>
+            </button>
+        </div>
+        <nav class="flex flex-col gap-0 px-8 pb-12 overflow-y-auto flex-1 min-h-0 bg-white" aria-label="Mobile">
+            <a href="/#home" class="mobile-nav-link py-3.5 text-lg font-medium text-neutral-900 border-b border-neutral-300 active:bg-neutral-100">Home</a>
+            <a href="/#about" class="mobile-nav-link py-3.5 text-lg font-medium text-neutral-900 border-b border-neutral-300 active:bg-neutral-100">About Me</a>
+            <a href="/case-study/" class="mobile-nav-link py-3.5 text-lg font-medium text-neutral-900 border-b border-neutral-300 active:bg-neutral-100">Case Study</a>
+            <a href="/#work" class="mobile-nav-link py-3.5 text-lg font-medium text-neutral-900 border-b border-neutral-300 active:bg-neutral-100">Work</a>
+            <a href="/#services" class="mobile-nav-link py-3.5 text-lg font-medium text-neutral-900 border-b border-neutral-300 active:bg-neutral-100">What I Do</a>
+            <a href="/#contact" class="mobile-nav-link py-3.5 text-lg font-medium text-neutral-900 border-b border-neutral-300 active:bg-neutral-100">Contact</a>
+        </nav>
+    </div>
+
     <script>
         const cursorGlow = document.getElementById('cursor-glow');
         let cursorX = 0, cursorY = 0, glowX = 0, glowY = 0;
@@ -331,6 +361,38 @@ tailwind.config = {
                 magnet.style.transform = 'translate(0, 0)';
             });
         });
+
+        (function () {
+            const openBtn = document.getElementById('mobile-menu-open');
+            const closeBtn = document.getElementById('mobile-menu-close');
+            const panel = document.getElementById('mobile-menu');
+            if (!openBtn || !panel) return;
+
+            function openMenu() {
+                panel.classList.add('is-open');
+                panel.setAttribute('aria-hidden', 'false');
+                openBtn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeMenu() {
+                panel.classList.remove('is-open');
+                panel.setAttribute('aria-hidden', 'true');
+                openBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+
+            openBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                openMenu();
+            });
+            if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+            panel.querySelectorAll('a.mobile-nav-link').forEach(function (a) {
+                a.addEventListener('click', closeMenu);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && panel.getAttribute('aria-hidden') === 'false') closeMenu();
+            });
+        })();
     </script>
 
 </body></html>
